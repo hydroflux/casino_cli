@@ -54,7 +54,6 @@ class War
         clear_terminal
         puts "Let's play! Are you ready? (Aces are low!)"
         pause
-        gets.chomp
         deal
         @result = game_result
     end
@@ -80,13 +79,14 @@ class War
 
     def game_result
         if @dealer_card > @player_card
-            puts "You got #{@player_card}, but I got #{@dealer_card}! I win! "
+            puts "You got #{read_card @player_card}, but I got #{read_card @dealer_card}! I win! "
             "loss"
         elsif @dealer_card < @player_card
-            puts "I only got #{@dealer_card}, but you got #{@player_card}. You win, great work!"
+            puts "I only got #{read_card @dealer_card}, but you got #{read_card @player_card}. You win, great work!"
             "win"
         else
-            puts "We tied, time to go to war!"
+            puts "We both got #{read_card @dealer_card}. That's a tie!"
+            puts "Time to go to war!"
             sleep 1
             war
         end
