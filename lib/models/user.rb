@@ -1,3 +1,7 @@
 class User < ActiveRecord::Base
-    #Some code
+    
+    def validate_user? password
+        self.password_string == password
+    end
+
 end
