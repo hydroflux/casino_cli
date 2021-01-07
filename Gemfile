@@ -13,3 +13,5 @@ gem "sqlite3", "~> 1.4"
 gem "require_all", "~> 3.0"
 
 gem "tty-prompt", "~> 0.23.0"
+
+gem "tty-box", "~> 0.7.0"

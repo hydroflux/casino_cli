@@ -1,10 +1,21 @@
 class Cli
-    # ActiveRecord::Base.logger = nil
+    ActiveRecord::Base.logger = nil
 
     def initialize
         @user = ''
         @weekday = ''
         @time_of_day = ''
+    end
+
+    def banner
+        box = TTY::Box.frame(width: 80, height: 5, border: :thick, align: :center, padding: 1, style: {
+            fg: :white,
+            bg: :blue,
+            }) do
+            "Stay-At-Home Casino"
+        end
+        print box
+        puts "\n"
     end
 
     def start
@@ -14,6 +25,7 @@ class Cli
 
     def clear_terminal
         system 'clear'
+        banner
     end
 
     def prompt
@@ -34,7 +46,7 @@ class Cli
 
     def login_prompt
         puts time_and_day
-        sleep 2
+        sleep 1
         clear_terminal
         answer = prompt.yes? "Have you been here before?"
         answer ? login_user : new_user
@@ -53,8 +65,9 @@ class Cli
             password = prompt.mask "Do you remember your secret passphrase?"
             if @user.validate_user? password
                 puts "Oh I recognize you now. It's good to see you #{@user.username}!"
-                main_menu
+                game_prompt
             else
+                clear_terminal
                 puts "Sorry #{@user.username}, that doesn't line up with what we've got written down here."
                 sleep 2
                 hint = prompt.yes? "Do you need a hint?"
@@ -124,11 +137,42 @@ class Cli
         clear_terminal
         @user = User.create username: username, password_string: password
         answer = prompt.yes? "Hello there #{@user.username}! Are you ready to play a game?"
-        answer ? main_menu : exit_casino
+        answer ? game_prompt : exit_casino
     end
 
-    def main_menu
-        puts "made it"
+    def game_prompt
+        clear_terminal
+        game_choice = prompt.select "What would you like to do?" do |menu|
+            menu.choice "Blackjack"
+            menu.choice "War"
+            menu.choice "Strip Poker"
+            menu.choice "[Exit]"
+        end
+        if game_choice == "Blackjack"
+            # Blackjack.new
+        elsif game_choice == "War"
+            game = War.new
+            result = game.start
+            if result != "quit"
+                WarGame.create user: @user, result: result
+                play_again? ? warGame.start : game_prompt
+            else
+                game_prompt
+            end
+        elsif game_choice == "Strip Poker"
+            puts game_prompt_fail
+        else
+            exit_casino
+        end
+    end
+
+    def game_prompt_fail
+        clear_terminal
+        puts "Now you know we don't do that sort of thing around here, stop messing around #{@user.username}"
+        sleep 1
+        puts "What do you really want to play?"
+        sleep 1
+        game_prompt
     end
 
     def exit_casino
