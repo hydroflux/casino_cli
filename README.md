@@ -28,49 +28,49 @@ To run this project, install it locally by cloning the GitHub Repository down & 
 
 # Code Examples
 
-    ``` ruby
-    def game_prompt
-        clear_terminal
-        system `say "What would you like to play?"`
-        game_choice = prompt.select "What would you like to play?" do |menu|
-            menu.choice "Blackjack"
-            menu.choice "War"
-            menu.choice "Strip Poker"
-            if @user.games_played.count > 0
-                menu.choice "[Check Your Score]"
-            end
-            menu.choice "[Exit]"
+``` ruby
+def game_prompt
+    clear_terminal
+    system `say "What would you like to play?"`
+    game_choice = prompt.select "What would you like to play?" do |menu|
+        menu.choice "Blackjack"
+        menu.choice "War"
+        menu.choice "Strip Poker"
+        if @user.games_played.count > 0
+            menu.choice "[Check Your Score]"
         end
-        if game_choice == "Blackjack"
-            play_game Blackjack
-        elsif game_choice == "War"
-            play_game War
-        elsif game_choice == "Strip Poker"
-            puts game_prompt_fail
-        elsif game_choice == "[Check Your Score]"
-            check_score
-        else
-            exit_casino
-        end
+        menu.choice "[Exit]"
     end
-    ```
+    if game_choice == "Blackjack"
+        play_game Blackjack
+    elsif game_choice == "War"
+        play_game War
+    elsif game_choice == "Strip Poker"
+        puts game_prompt_fail
+    elsif game_choice == "[Check Your Score]"
+        check_score
+    else
+        exit_casino
+    end
+end
+```
 
 
-    ``` ruby
-        def new_game
-            puts "Sounds good, I hope you're feeling lucky!"
-            system `say "Sounds good, I hope you're feeling lucky!"`
-            @dealer_cards = []
-            @my_cards = []
-            open
-            while hit? && card_total(@my_cards) < 21
-                clear
-                @my_cards << deal_card
-                read_my_cards
-            end
-            end_game
+``` ruby
+    def new_game
+        puts "Sounds good, I hope you're feeling lucky!"
+        system `say "Sounds good, I hope you're feeling lucky!"`
+        @dealer_cards = []
+        @my_cards = []
+        open
+        while hit? && card_total(@my_cards) < 21
+            clear
+            @my_cards << deal_card
+            read_my_cards
         end
-    ```
+        end_game
+    end
+```
 
 
 # Features
