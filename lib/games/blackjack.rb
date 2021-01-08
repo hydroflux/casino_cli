@@ -1,10 +1,12 @@
 class Blackjack
+    attr_reader :result
+
     def banner
         box = TTY::Box.frame(width: 80, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :black,
             bg: :white,
             }) do
-            "Stay-At-Home Casino"
+            "Stay-At-Home Casino: BlackJack Edition"
         end
         print box
         puts "\n"
@@ -24,14 +26,14 @@ class Blackjack
         gets.chomp
     end
 
-    def welcome
+    def start
         clear
         answer = prompt.yes? "Welcome! Would you like to play BlackJack?"
         clear
         if answer == true
             new_game
         else
-            "quit" 
+            @result = "quit" 
         end
     end
 
@@ -62,10 +64,8 @@ class Blackjack
         sleep 1
         @dealer_cards = []
         @my_cards = []
-        # Open the game
         open
-        # Hit?
-        while hit? do
+        while hit? && card_total(@my_cards) < 21
             clear
             @my_cards << deal_card
             read_my_cards
@@ -79,7 +79,7 @@ class Blackjack
     def open
         2.times { |card| @my_cards << deal_card }
         2.times { |card| @dealer_cards << deal_card }
-        read_all_cards
+        read_my_cards
     end
     
     def read_my_cards

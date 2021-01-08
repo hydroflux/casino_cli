@@ -150,8 +150,7 @@ class Cli
             menu.choice "[Exit]"
         end
         if game_choice == "Blackjack"
-            # Blackjack.new
-            # play_game Blackjack
+            play_game Blackjack
         elsif game_choice == "War"
             play_game War
         elsif game_choice == "Strip Poker"
@@ -173,7 +172,7 @@ class Cli
     def play_game game
         new_game = game.new
         new_game.start
-        if result != "quit"
+        if new_game.result != "quit"
             Game.create user_id: @user.id, game_type: "war", result: new_game.result
             play_again? game
         else
