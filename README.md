@@ -119,12 +119,13 @@ Completed:
 - Ruby reads all prompts back to the User
 
 To Do List
-- Add additional games
+- Add additional, more complicated games (roulette)
 - Increase general folksyness
 - Update GUI, particularly for the scoreboard
 - Update user prompt's overall sass
 - Provide user with ability to compare their score against a "leaderboard"
 - Provide user with ability to erase the scoreboard & high-tail it out of the casino
+- Add a test suite for additional games
 
 # Status
 - Complete; Possible to include additional games & additional user functionality
