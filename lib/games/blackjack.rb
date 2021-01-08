@@ -1,24 +1,42 @@
 class Blackjack
+    def banner
+        box = TTY::Box.frame(width: 80, height: 5, border: :thick, align: :center, padding: 1, style: {
+            fg: :black,
+            bg: :white,
+            }) do
+            "Stay-At-Home Casino"
+        end
+        print box
+        puts "\n"
+    end
+
     def prompt
         TTY::Prompt.new
     end
 
     def clear
         system "clear"
+        banner
+    end
+    
+    def pause
+        puts "Press [ENTER] to continue."
+        gets.chomp
     end
 
     def welcome
         clear
-        answer = prompt.yes? "Welcome! Would you like to play Black-Jack?"
+        answer = prompt.yes? "Welcome! Would you like to play BlackJack?"
+        clear
         if answer == true
             new_game
         else
-            exit 
+            "quit" 
         end
     end
 
     def card_deck
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     end
 
     def deal_card 
@@ -40,133 +58,101 @@ class Blackjack
     end
 
     def new_game
+        puts "Sounds good, I hope you're feeling lucky!"
+        sleep 1
         @dealer_cards = []
         @my_cards = []
         # Open the game
         open
-        # Read our cards
-        read_cards
         # Hit?
+        while hit? do
+            clear
+            @my_cards << deal_card
+            read_my_cards
+            if bust?
+                break
+            end
+        end
+        end_game
     end
 
     def open
         2.times { |card| @my_cards << deal_card }
         2.times { |card| @dealer_cards << deal_card }
-        puts "MY CARDS:"
-        @my_cards.map do |card|
-            read_card card
-        end
-        puts "DEALER CARDS:"
-        @dealer_cards.map do |card|
-            read_card card
-        end
+        read_all_cards
     end
     
+    def read_my_cards
+        puts "MY CARDS:"
+        @my_cards.map do |card|
+            puts read_card card
+        end
+    end
+
+    def read_all_cards
+        clear
+        puts "MY CARDS:"
+        @my_cards.map do |card|
+            puts read_card card
+        end
+        puts " "
+        puts "DEALER CARDS:"
+        @dealer_cards.map do |card|
+            puts read_card card
+        end
+    end
+
     def hit?
-        2.times do |card|
-            new_card = deal_card #deal_single_card twice and put it in dealers cards
-            dealers_cards << new_card
+        puts " "
+        prompt.yes? "Would you like to hit?"
+    end
+
+    def card_total hand
+        hand.reduce do |sum, card|
+            sum + card
         end
-        puts "Dealers cards: #{dealers_cards}" #look at cards
-        hit 
-        result  
-        #else complete_game
     end
 
-    def result
-        my_total = @my_cards.reduce(0) do |sum, x|
-            sum + x
+    def bust?
+        if card_total(@my_cards) == 21
+            true
         end
-        puts my_total
     end
 
-    def bust
-        puts "Better luck next time!"
-        exit
-    end
-
-
-
-    #########WAR##########
-
-    def game_result
-        if @dealer_card > @player_card
-            puts "You got #{read_card @player_card}, but I got #{read_card @dealer_card}! I win! "
-            "loss"
-        elsif @dealer_card < @player_card
-            puts "I only got #{read_card @dealer_card}, but you got #{read_card @player_card}. You win, great work!"
-            "win"
-        else
-            puts "We both got #{read_card @dealer_card}. That's a tie!"
-            puts "Time to go to war!"
+    def end_game
+        clear
+        my_total = card_total @my_cards
+        dealer_total = card_total @dealer_cards
+        if my_total > 21
+            puts "Oops! You busted. Better luck next time!"
+            @result = "lose"
+        elsif my_total == 21
+            puts "Holy shit! You hit 21! You win!"
+            @result = "win"
+        elsif my_total > dealer_total
+            puts "Looks like you're winning, time for me to hit."
             sleep 1
-            war
+            while dealer_total < my_total && dealer_total < 21 do
+                @dealer_cards << deal_card
+                read_all_cards
+                sleep 2
+                dealer_total = card_total @dealer_cards
+                if dealer_total > 21
+                    clear
+                    puts "Oops, looks like I busted this time. Congratulations, you win!"
+                    @result = "win"
+                elsif dealer_total > my_total
+                    clear
+                    puts "Looks like I win this one!"
+                    @result = "lose"
+                end
+            end
+        elsif my_total == dealer_total
+            clear
+            puts "We were tied, I'm counting that as a loss for you."
+            @result = "loss"
         end
         pause
     end
 
-
-
-
-
-
-
-
-
-
-
-
-
-    # def start(your_answer)
-    #     answer = "yes"
-    #     puts "Welcome to BlackJack! Would you like to play?"
-    #     if answer == your_answer
-    #         deal_cards
-    #     else
-    #         exit
-    # end
-
-    # def deal_cards
-    #     2.times
-    #     possible_cards.random_select << your_cards
-    #     2.times
-    #     possible_cards.random_select << dealers_cards
-    # end
-
-    # def read_cards
-    #     return your_cards
-    #     return dealers_cards
-    # end
-
-    # def hit(your_answer)
-    #     answer = "yes"
-    #     puts "Would you like another card?"
-    #     if answer == your_answer
-    #         possible_cards.random_select << your_cards
-    #     else
-    #         compare
-    #     end
-    # end
-
-    # #some function that give the dealer a card until he either beats you or busts
-    # #compare actually just needs to show you your cards and the dealers cards
-    # def compare(your_cards)
-    #     if your_cards >> 21
-    #         puts "Sorry, better luck next time"
-    #     else
-    #         puts "Congrats! You win! Would you like to play again?"
-    #         if answer == "yes"
-    #             deal_cards
-    #         end
-    #     end
-    # end
-
-    # def game_over
-    #     exit_game
-    # end
-            
-    def exit
-        clear
-        puts "Goodbye!"
-    end
 end

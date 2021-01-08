@@ -4,4 +4,4 @@ require_relative 'config/environment'
 # app.start
 
 game = Blackjack.new
-game.new_game
+game.welcome
