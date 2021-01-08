@@ -166,7 +166,7 @@ class Cli
         puts "Now you know we don't do that sort of thing around here, stop messing around #{@user.username}"
         sleep 1
         puts "What do you really want to play?"
-        sleep 1
+        sleep 1z
         game_prompt
     end
 
