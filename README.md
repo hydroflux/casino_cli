@@ -120,7 +120,9 @@ Completed:
 
 To Do List
 - Add additional games
-- Increase overall folksyness
+- Increase general folksyness
+- Update GUI, particularly for the scoreboard
+- Update user prompt's overall sass
 - Provide user with ability to compare their score against a "leaderboard"
 - Provide user with ability to erase the scoreboard & high-tail it out of the casino
 
