@@ -23,8 +23,10 @@ Stay-At-Home Casino tracks the user's "wins" & "losses", & user's are able to ch
 
 # Setup
 To run this project, install it locally by cloning the GitHub Repository down & running the following from the application folder:
-- bundle install
-- ruby runner.rb
+``` ruby
+bundle install
+ruby runner.rb
+```
 
 # Code Examples
 
@@ -125,7 +127,7 @@ To Do List
 - Complete; Possible to include additional games & additional user functionality
 
 # Contact
-- Created by Jack Hubert (link) & Reed Roffis (link)
+- Created by [Jack Hubert](https://github.com/hydroflux) & [Reed Roffis](https://github.com/reedroffis)
 - Please contact us if you have any questions!
 
 

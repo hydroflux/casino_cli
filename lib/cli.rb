@@ -121,7 +121,7 @@ class Cli
         now = Time.now
         @weekday = now.strftime("%A")
         hour = now.hour
-        if hour < 12
+        if hour < 13
             @time_of_day = "morning"
             "Look at you, gambling on a #{@weekday} #{@time_of_day}!"
         elsif hour < 16
