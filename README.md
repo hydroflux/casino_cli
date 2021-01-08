@@ -56,6 +56,24 @@ def game_prompt
 end
 ```
 
+``` ruby
+# Check Time User is Playing
+def time_and_day
+    now = Time.now
+    @weekday = now.strftime("%A")
+    hour = now.hour
+    if hour < 12
+        @time_of_day = "morning"
+        "Look at you, gambling on a #{@weekday} #{@time_of_day}!"
+    elsif hour < 16
+        @time_of_day = "afternoon"
+        "Thanks for coming by this #{@weekday} #{@time_of_day}!"
+    else
+        @time_of_day = "evening"
+        "Wonderful, thank you for joining us this #{@weekday} #{@time_of_day}!"
+    end
+end
+```
 
 ``` ruby
 # BlackJack
