@@ -150,6 +150,7 @@ class Cli
             menu.choice "Blackjack"
             menu.choice "War"
             menu.choice "Strip Poker"
+            if 
             menu.choice "[Exit]"
         end
         if game_choice == "Blackjack"
@@ -190,6 +191,11 @@ class Cli
             game_prompt
         end
     end 
+
+    def check_score
+        binding.pry
+        @user.scores
+    end
 
     def exit_casino
         clear_terminal

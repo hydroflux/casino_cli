@@ -93,6 +93,10 @@ To run this project, install it locally by cloning the GitHub Repository down & 
 - bundle install
 - ruby runner.rb
 
+CODE EXAMPLES:
+#
+#
+
 FEATURES:
 # Completed
 - Create a user profile with a username, password, & password hint
