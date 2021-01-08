@@ -8,7 +8,7 @@ class Cli
     end
 
     def banner
-        box = TTY::Box.frame(width: 100, height: 5, border: :thick, align: :center, padding: 1, style: {
+        box = TTY::Box.frame(width: 120, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :white,
             bg: :blue,
             }) do

@@ -2,7 +2,7 @@ class Blackjack
     attr_reader :result, :game_type
 
     def banner
-        box = TTY::Box.frame(width: 100, height: 5, border: :thick, align: :center, padding: 1, style: {
+        box = TTY::Box.frame(width: 120, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :black,
             bg: :white,
             }) do
@@ -26,12 +26,18 @@ class Blackjack
         gets.chomp
     end
 
-    def start
+    def welcome
+        system `say "Welcome to Stay-At-Home Casino: BlackJack Edition"`
+    end
+
+    def start replay=nil
         @game_type = "BlackJack"
         clear
-        system `say "Welcome to Stay-At-Home Casino: BlackJack Edition"`
+        if replay == nil
+            welcome
+        end
         system `say "Are you ready to play BlackJack?"`
-        answer = prompt.yes? "Welcome! Are you ready to play BlackJack?"
+        answer = prompt.yes? "Are you ready to play BlackJack?"
         clear
         if answer == true
             new_game
@@ -140,6 +146,11 @@ class Blackjack
                     clear
                     puts "Oops, looks like I busted this time. Congratulations, you win!"
                     system `say "Oops, looks like I busted this time. Congratulations, you win!"`
+                    @result = "win"
+                elsif dealer_total == 21
+                    clear
+                    puts "Holy shit! I can't believe I hit 21! You lose sucker."
+                    system `say "Holy shit! I can't believe I hit 21! You lose sucker."`
                     @result = "win"
                 elsif dealer_total > my_total
                     clear

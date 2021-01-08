@@ -2,7 +2,7 @@ class War
     attr_reader :result, :game_type
 
     def banner
-        box = TTY::Box.frame(width: 100, height: 5, border: :thick, align: :center, padding: 1, style: {
+        box = TTY::Box.frame(width: 120, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :white,
             bg: :red,
             }) do
@@ -12,8 +12,11 @@ class War
         puts "\n"
     end
 
-    def start
-        welcome
+    def start replay=nil
+        clear_terminal
+        if replay == nil
+            welcome
+        end
         play_prompt
     end
 
@@ -33,7 +36,6 @@ class War
     
     def welcome
         @game_type = "War"
-        clear_terminal
         puts "Welcome to Stay-At-Home War!"
         system `say "Welcome to Stay-At-Home War!"`
         clear_terminal
