@@ -35,11 +35,13 @@ class Cli
     def welcome
         clear_terminal
         puts 'Hello, welcome to the "Stay-At-Home Casino"!'
+        system `say "Welcome to the Stay At Home Casino App!"`
         sleep 2
         clear_terminal
     end
 
     def play_prompt
+        system `say "Would you like to play a game with us today?"`
         answer = prompt.yes? "Would you like to play a game with us today?"
         answer ? login_prompt : exit_casino
     end
@@ -48,15 +50,16 @@ class Cli
         puts time_and_day
         sleep 1
         clear_terminal
+        system `say "Have you been here before?"`
         answer = prompt.yes? "Have you been here before?"
         answer ? login_user : new_user
     end
 
     def login_user
         clear_terminal
+        system `say "What's your name friend?"`
         username = prompt.ask "What's your name friend?"
         username.titleize
-        # I'm not wearing my glasses this #{@time_of_day}?"
         clear_terminal
         @user = User.find_by username: username
         if @user
