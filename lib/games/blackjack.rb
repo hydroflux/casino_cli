@@ -72,9 +72,6 @@ class Blackjack
             clear
             @my_cards << deal_card
             read_my_cards
-            if bust?
-                break
-            end
         end
         end_game
     end
@@ -115,12 +112,6 @@ class Blackjack
     def card_total hand
         hand.reduce do |sum, card|
             sum + card
-        end
-    end
-
-    def bust?
-        if card_total(@my_cards) == 21
-            true
         end
     end
 
