@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
         war_losses = my_games.filter { |game| game.result == "loss" && game.game_type == "War" }.count
         blackJack_wins = my_games.filter { |game| game.result == "win" && game.game_type == "BlackJack" }.count
         blackJack_losses = my_games.filter { |game| game.result == "loss" && game.game_type == "BlackJack" }.count
-        binding.pry
+        TTY::Table.new(["War","BlackJack"], [[war_wins, blackJack_wins], [war_losses, blackJack_losses]])
     end
 
 end
