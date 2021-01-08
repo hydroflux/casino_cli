@@ -89,6 +89,7 @@ class Blackjack
     end
     
     def read_my_cards
+        clear
         puts "MY CARDS:"
         @my_cards.map do |card|
             puts read_card card
@@ -107,6 +108,7 @@ class Blackjack
         @dealer_cards.map do |card|
             puts read_card card
         end
+        sleep 1
     end
 
     def hit?
@@ -125,6 +127,7 @@ class Blackjack
         clear
         my_total = card_total @my_cards
         dealer_total = card_total @dealer_cards
+        read_all_cards
         if my_total > 21
             puts "Oops! You busted. Better luck next time!"
             system `say "Oops! You busted. Better luck next time!"`
@@ -161,6 +164,7 @@ class Blackjack
             end
         elsif my_total == dealer_total
             clear
+            read_all_cards
             puts "We were tied, I'm counting that as a loss for you."
             system `say "We were tied, I'm counting that as a loss for you."`
             @result = "loss"
