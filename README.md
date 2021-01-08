@@ -126,6 +126,7 @@ To Do List
 - Provide user with ability to compare their score against a "leaderboard"
 - Provide user with ability to erase the scoreboard & high-tail it out of the casino
 - Add a test suite for additional games
+- Add betting options
 
 # Status
 - Complete; Possible to include additional games & additional user functionality
