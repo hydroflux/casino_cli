@@ -116,6 +116,7 @@ Completed:
     - War
     - Strip Poker
 - Check user scores for each game
+- Ruby reads all prompts back to the User
 
 To Do List
 - Add additional games

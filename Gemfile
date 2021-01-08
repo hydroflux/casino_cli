@@ -14,5 +14,3 @@ gem "tty-prompt", "~> 0.23.0"
 gem "tty-box", "~> 0.7.0"
 
 gem "tty-table", "~> 0.12.0"
-
-gem "pry", "~> 0.12.2"
