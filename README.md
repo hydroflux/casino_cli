@@ -67,18 +67,19 @@ Table of Contents
 <!-- - License -->
  -->
 
-GENERAL INFORMATION:
+
+# GENERAL INFORMATION
 
 Stay-At-Home Casino is a CLI application that allows a user to create a user profile, & then play a variety of Casino games, including BlackJack, War, & Strip Poker???
 Stay-At-Home Casino tracks the user's "wins" & "losses", & user's are able to check this progress on a scoreboard.
 
-# If a user isn't happy with their score, or would like to erase it completely, they can do so. 
 
-INTODUCTORY VIDEO:
+# INTODUCTORY VIDEO
 
-# LINK
+(link)
 
-TECHNOLOGIES:
+
+# TECHNOLOGIES
 - Ruby - Version 2.6.5
 - ActiveRecord - Version 6.0
 - Sinatra-ActiveRecord - Version 2.0
@@ -88,17 +89,17 @@ TECHNOLOGIES:
 - TTY-Box - Version 0.7.0
 - TTY-Table - Version 0.12.0
 
-SETUP:
+
+# SETUP
 To run this project, install it locally by cloning the GitHub Repository down & running the following from the application folder:
 - bundle install
 - ruby runner.rb
 
-CODE EXAMPLES:
-#
-#
+# CODE EXAMPLES
 
-FEATURES:
-# Completed
+
+# FEATURES
+Completed:
 - Create a user profile with a username, password, & password hint
 - Logging in for returning users
 - Choose from three (3) sample casino games for the user to play:
@@ -107,13 +108,15 @@ FEATURES:
     - Strip Poker
 - Check user scores for each game
 
-# To Do List
+To Do List
 - Add additional games
+- Increase overall folksyness
 - Provide user with ability to compare their score against a "leaderboard"
+- Provide user with ability to erase the scoreboard & high-tail it out of the casino
 
-STATUS:
-- Complete; Possible to include additional games & additional user functionality.
+# STATUS
+- Complete; Possible to include additional games & additional user functionality
 
-CONTACT:
+# CONTACT
 - Created by Jack Hubert (link) & Reed Roffis (link)
-- Please contact us if you havfe any questions!
+- Please contact us if you have any questions!
