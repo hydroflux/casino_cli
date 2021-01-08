@@ -1,8 +1,8 @@
 class Blackjack
-    attr_reader :result
+    attr_reader :result, :game_type
 
     def banner
-        box = TTY::Box.frame(width: 80, height: 5, border: :thick, align: :center, padding: 1, style: {
+        box = TTY::Box.frame(width: 100, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :black,
             bg: :white,
             }) do
@@ -27,8 +27,11 @@ class Blackjack
     end
 
     def start
+        @game_type = "BlackJack"
         clear
-        answer = prompt.yes? "Welcome! Would you like to play BlackJack?"
+        system `say "Welcome to Stay-At-Home Casino: BlackJack Edition"`
+        system `say "Are you ready to play BlackJack?"`
+        answer = prompt.yes? "Welcome! Are you ready to play BlackJack?"
         clear
         if answer == true
             new_game
@@ -61,7 +64,7 @@ class Blackjack
 
     def new_game
         puts "Sounds good, I hope you're feeling lucky!"
-        sleep 1
+        system `say "Sounds good, I hope you're feeling lucky!"`
         @dealer_cards = []
         @my_cards = []
         open
@@ -87,6 +90,7 @@ class Blackjack
         @my_cards.map do |card|
             puts read_card card
         end
+        sleep 2
     end
 
     def read_all_cards
@@ -104,6 +108,7 @@ class Blackjack
 
     def hit?
         puts " "
+        system `say "Would you like to hit?"`
         prompt.yes? "Would you like to hit?"
     end
 
@@ -125,12 +130,15 @@ class Blackjack
         dealer_total = card_total @dealer_cards
         if my_total > 21
             puts "Oops! You busted. Better luck next time!"
+            system `say "Oops! You busted. Better luck next time!"`
             @result = "lose"
         elsif my_total == 21
             puts "Holy shit! You hit 21! You win!"
+            system `say "Holy shit! You hit 21! You win!"`
             @result = "win"
         elsif my_total > dealer_total
             puts "Looks like you're winning, time for me to hit."
+            system `say "Looks like you're winning, time for me to hit."`
             sleep 1
             while dealer_total < my_total && dealer_total < 21 do
                 @dealer_cards << deal_card
@@ -140,16 +148,19 @@ class Blackjack
                 if dealer_total > 21
                     clear
                     puts "Oops, looks like I busted this time. Congratulations, you win!"
+                    system `say "Oops, looks like I busted this time. Congratulations, you win!"`
                     @result = "win"
                 elsif dealer_total > my_total
                     clear
                     puts "Looks like I win this one!"
+                    system `say "Looks like I win this one!"`
                     @result = "lose"
                 end
             end
         elsif my_total == dealer_total
             clear
             puts "We were tied, I'm counting that as a loss for you."
+            system `say "We were tied, I'm counting that as a loss for you."`
             @result = "loss"
         end
         pause

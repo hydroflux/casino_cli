@@ -1,16 +1,12 @@
 class War
-    attr_reader :result
-
-    def initialize
-        @result = 'quit'
-    end
+    attr_reader :result, :game_type
 
     def banner
-        box = TTY::Box.frame(width: 80, height: 5, border: :thick, align: :center, padding: 1, style: {
+        box = TTY::Box.frame(width: 100, height: 5, border: :thick, align: :center, padding: 1, style: {
             fg: :white,
             bg: :red,
             }) do
-            "Stay-At-Home War"
+            "Stay-At-Home Casino: War Edition"
         end
         print box
         puts "\n"
@@ -36,13 +32,15 @@ class War
     end
     
     def welcome
+        @game_type = "War"
         clear_terminal
         puts "Welcome to Stay-At-Home War!"
-        sleep(2)
+        system `say "Welcome to Stay-At-Home War!"`
         clear_terminal
     end
 
     def play_prompt
+        system `say "Are you ready to play a game of War?"`
         answer = prompt.yes? "Are you ready to play a game of War?"
         answer ? new_game : "quit"
     end
@@ -53,7 +51,8 @@ class War
 
     def new_game
         clear_terminal
-        puts "Let's play! Are you ready? (Aces are low!)"
+        puts "Let's play! (Aces are low!)"
+        system `say "Let's play! (Aces are low!)"`
         pause
         deal
         game_result
@@ -80,15 +79,18 @@ class War
 
     def game_result
         if @dealer_card > @player_card
-            puts "You got a #{read_card @player_card}, but I got a #{read_card @dealer_card}! I win! "
+            puts "You got a #{read_card @player_card}, but I got a #{read_card @dealer_card}! I win!"
+            system `say "You got a #{read_card @player_card}, but I got a #{read_card @dealer_card}! I win!"`
             @result = "loss"
         elsif @dealer_card < @player_card
             puts "I only got a #{read_card @dealer_card}, but you got a #{read_card @player_card}. You win, great work!"
+            system `say "I only got a #{read_card @dealer_card}, but you got a #{read_card @player_card}. You win, great work!"`
             @result = "win"
         else
             puts "We both got a #{read_card @dealer_card}. That's a tie!"
+            system `say "We both got a #{read_card @dealer_card}. That's a tie!"`
             puts "Time to go to war!"
-            sleep 1
+            system `say "Time to go to war!"`
             war
         end
         pause
