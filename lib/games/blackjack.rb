@@ -131,10 +131,12 @@ class Blackjack
         if my_total > 21
             puts "Oops! You busted. Better luck next time!"
             system `say "Oops! You busted. Better luck next time!"`
+            sleep 1
             @result = "lose"
         elsif my_total == 21
             puts "Holy shit! You hit 21! You win!"
             system `say "Holy shit! You hit 21! You win!"`
+            sleep 1
             @result = "win"
         elsif my_total > dealer_total
             puts "Looks like you're winning, time for me to hit."
@@ -149,16 +151,19 @@ class Blackjack
                     clear
                     puts "Oops, looks like I busted this time. Congratulations, you win!"
                     system `say "Oops, looks like I busted this time. Congratulations, you win!"`
+                    sleep 1
                     @result = "win"
                 elsif dealer_total == 21
                     clear
                     puts "Holy shit! I can't believe I hit 21! You lose sucker."
                     system `say "Holy shit! I can't believe I hit 21! You lose sucker."`
+                    sleep 1
                     @result = "win"
                 elsif dealer_total > my_total
                     clear
                     puts "Looks like I win this one!"
                     system `say "Looks like I win this one!"`
+                    sleep 1
                     @result = "lose"
                 end
             end
@@ -167,6 +172,7 @@ class Blackjack
             read_all_cards
             puts "We were tied, I'm counting that as a loss for you."
             system `say "We were tied, I'm counting that as a loss for you."`
+            sleep 1
             @result = "loss"
         end
         pause
