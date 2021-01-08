@@ -28,7 +28,8 @@ To run this project, install it locally by cloning the GitHub Repository down & 
 
 # Code Examples
 
-    `def game_prompt
+    ```
+    def game_prompt
         clear_terminal
         system `say "What would you like to play?"`
         game_choice = prompt.select "What would you like to play?" do |menu|
@@ -51,10 +52,12 @@ To run this project, install it locally by cloning the GitHub Repository down & 
         else
             exit_casino
         end
-    end`
+    end
+    ```
 
 
-    `def new_game
+    ```
+    def new_game
         puts "Sounds good, I hope you're feeling lucky!"
         system `say "Sounds good, I hope you're feeling lucky!"`
         @dealer_cards = []
@@ -66,7 +69,8 @@ To run this project, install it locally by cloning the GitHub Repository down & 
             read_my_cards
         end
         end_game
-    end`
+    end
+    ```
 
 
 # Features
