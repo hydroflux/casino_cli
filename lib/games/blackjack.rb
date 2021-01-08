@@ -1,4 +1,4 @@
-class BlackJack
+class Blackjack
     def prompt
         TTY::Prompt.new
     end
@@ -21,54 +21,8 @@ class BlackJack
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     end
 
-    def new_game
-        @dealers_cards = []
-        @my_cards = []
-        2.times do |card|
-            new_card = deal_card #deal_single_card twice and put it in your cards
-            my_cards << new_card
-            clear 
-        end
-        puts "Your cards: #{my_cards}" #look at cards
-        2.times do |card|
-            new_card = deal_card #deal_single_card twice and put it in dealers cards
-            dealers_cards << new_card
-        end
-        puts "Dealers cards: #{dealers_cards}" #look at cards
-        hit 
-            
-        
-        result  
-    
-        #else complete_game
-    end
-
-
-    def hit
-        prompt = TTY::Prompt.new
-        answer = prompt.yes? "Would you like to hit?"
-        if answer == true
-            my_cards << 
-            clear 
-            puts "Your cards: #{my_cards}"
-            puts "Dealers cards: #{dealers_cards}"
-        end
-    end
-            
     def deal_card 
         card_deck.sample 
-    end
-
-    def result
-        my_total = my_cards.reduce(0) do |sum, x|
-            sum + x
-        end
-        puts my_total
-    end
-
-    def bust
-        puts "Better luck next time!"
-        exit
     end
 
     def read_card card
@@ -85,17 +39,55 @@ class BlackJack
         end
     end
 
+    def new_game
+        @dealer_cards = []
+        @my_cards = []
+        # Open the game
+        open
+        # Read our cards
+        read_cards
+        # Hit?
+    end
+
+    def open
+        2.times { |card| @my_cards << deal_card }
+        2.times { |card| @dealer_cards << deal_card }
+        puts "MY CARDS:"
+        @my_cards.map do |card|
+            read_card card
+        end
+        puts "DEALER CARDS:"
+        @dealer_cards.map do |card|
+            read_card card
+        end
+    end
+    
+    def hit?
+        2.times do |card|
+            new_card = deal_card #deal_single_card twice and put it in dealers cards
+            dealers_cards << new_card
+        end
+        puts "Dealers cards: #{dealers_cards}" #look at cards
+        hit 
+        result  
+        #else complete_game
+    end
+
+    def result
+        my_total = @my_cards.reduce(0) do |sum, x|
+            sum + x
+        end
+        puts my_total
+    end
+
+    def bust
+        puts "Better luck next time!"
+        exit
+    end
+
 
 
     #########WAR##########
-
-
-
-
-    def deal
-        @dealer_card = card_deck.sample
-        @player_card = card_deck.sample
-    end
 
     def game_result
         if @dealer_card > @player_card
@@ -178,5 +170,3 @@ class BlackJack
         puts "Goodbye!"
     end
 end
-
-binding.pry
