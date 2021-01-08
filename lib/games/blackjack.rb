@@ -69,8 +69,8 @@ class Blackjack
     end
 
     def new_game
-        puts "Sounds good, I hope you're feeling lucky!"
-        system `say "Sounds good, I hope you're feeling lucky!"`
+        puts "Sounds good, I hope you're feeling lucky! (Aces are low)"
+        system `say "Sounds good, I hope you're feeling lucky! (Aces are low)"`
         @dealer_cards = []
         @my_cards = []
         open

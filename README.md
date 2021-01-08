@@ -127,6 +127,7 @@ To Do List
 - Provide user with ability to erase the scoreboard & high-tail it out of the casino
 - Add a test suite for additional games
 - Add betting options
+- Add logic to account for the user choosing if an Ace will play as high or low
 
 # Status
 - Complete; Possible to include additional games & additional user functionality

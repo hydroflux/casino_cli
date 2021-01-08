@@ -208,9 +208,9 @@ class Cli
         game_prompt
     end
 
-    def play_game game
+    def play_game game, alt=nil
         new_game = game.new
-        new_game.start
+        new_game.start alt
         if new_game.result != "quit"
             Game.create user_id: @user.id, game_type: new_game.game_type, result: new_game.result
             play_again? game
@@ -222,7 +222,7 @@ class Cli
     def play_again? game
         system `say "Would you like to play another round?"`
         if prompt.yes? "Would you like to play another round?"
-            play_game game
+            play_game game, alt="replay"
         else
             game_prompt
         end
