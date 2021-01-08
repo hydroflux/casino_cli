@@ -28,7 +28,7 @@ To run this project, install it locally by cloning the GitHub Repository down & 
 
 # Code Examples
 
-    ```
+    ``` ruby
     def game_prompt
         clear_terminal
         system `say "What would you like to play?"`
@@ -56,20 +56,20 @@ To run this project, install it locally by cloning the GitHub Repository down & 
     ```
 
 
-    ```
-    def new_game
-        puts "Sounds good, I hope you're feeling lucky!"
-        system `say "Sounds good, I hope you're feeling lucky!"`
-        @dealer_cards = []
-        @my_cards = []
-        open
-        while hit? && card_total(@my_cards) < 21
-            clear
-            @my_cards << deal_card
-            read_my_cards
+    ``` ruby
+        def new_game
+            puts "Sounds good, I hope you're feeling lucky!"
+            system `say "Sounds good, I hope you're feeling lucky!"`
+            @dealer_cards = []
+            @my_cards = []
+            open
+            while hit? && card_total(@my_cards) < 21
+                clear
+                @my_cards << deal_card
+                read_my_cards
+            end
+            end_game
         end
-        end_game
-    end
     ```
 
 
