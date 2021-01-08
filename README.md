@@ -8,7 +8,7 @@ Stay-At-Home Casino tracks the user's "wins" & "losses", & user's are able to ch
 
 # Introductory Video
 
-(link)
+[Stay-At-Home Casino Video](https://www.youtube.com/watch?v=YPFvr6-WBc8) 
 
 # Technologies
 - Ruby - Version 2.6.5
@@ -119,15 +119,17 @@ Completed:
 - Ruby reads all prompts back to the User
 
 To Do List
-- Add additional, more complicated games (roulette)
+- Add additional, more complicated games (roulette, texas hold-em, etc.)
 - Increase general folksyness
 - Update GUI, particularly for the scoreboard
-- Update user prompt's overall sass
 - Provide user with ability to compare their score against a "leaderboard"
+- DRY out some of the more damp lines of code
 - Provide user with ability to erase the scoreboard & high-tail it out of the casino
 - Add a test suite for additional games
 - Add betting options
+- Update user prompt's overall sass
 - Add logic to account for the user choosing if an Ace will play as high or low
+- Add licensing information
 
 # Status
 - Complete; Possible to include additional games & additional user functionality
