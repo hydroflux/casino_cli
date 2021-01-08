@@ -85,7 +85,7 @@ def new_game
     @dealer_cards = []
     @my_cards = []
     open
-    while hit? && card_total(@my_cards) < 21
+    while card_total(@my_cards) < 21 && hit?
         clear
         @my_cards << deal_card
         read_my_cards
