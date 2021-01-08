@@ -1,4 +1,5 @@
 class War
+    attr_reader :result
 
     def initialize
         @result = 'quit'
@@ -55,7 +56,7 @@ class War
         puts "Let's play! Are you ready? (Aces are low!)"
         pause
         deal
-        @result = game_result
+        game_result
     end
 
     def deal
@@ -65,13 +66,13 @@ class War
 
     def read_card card
         if card == 1
-            "A"
+            "Ace"
         elsif card == 11
-            "J"
+            "Jack"
         elsif card == 12
-            "Q"
+            "Queen"
         elsif card == 13
-            "K"
+            "King"
         else
             card.to_s
         end
@@ -79,13 +80,13 @@ class War
 
     def game_result
         if @dealer_card > @player_card
-            puts "You got #{read_card @player_card}, but I got #{read_card @dealer_card}! I win! "
-            "loss"
+            puts "You got a #{read_card @player_card}, but I got a #{read_card @dealer_card}! I win! "
+            @result = "loss"
         elsif @dealer_card < @player_card
-            puts "I only got #{read_card @dealer_card}, but you got #{read_card @player_card}. You win, great work!"
-            "win"
+            puts "I only got a #{read_card @dealer_card}, but you got a #{read_card @player_card}. You win, great work!"
+            @result = "win"
         else
-            puts "We both got #{read_card @dealer_card}. That's a tie!"
+            puts "We both got a #{read_card @dealer_card}. That's a tie!"
             puts "Time to go to war!"
             sleep 1
             war

@@ -84,7 +84,7 @@ class Cli
             end
         else
             clear_terminal
-            puts "Hmmm, I don't think I know a #{username}"
+            puts "Hmmm, I don't think I know a #{username}..."
             sleep 2
             login_fail
         end
@@ -134,15 +134,16 @@ class Cli
         username = prompt.ask "What's your name, friend?"
         username.titleize
         password = prompt.mask "What would you like your secret passphrase to be, #{username}? So we know it's really you."
+        hint = prompt.ask "What about a hint, in case you forget your password?"
         clear_terminal
-        @user = User.create username: username, password_string: password
+        @user = User.create username: username, password_string: password, hint: hint
         answer = prompt.yes? "Hello there #{@user.username}! Are you ready to play a game?"
         answer ? game_prompt : exit_casino
     end
 
     def game_prompt
         clear_terminal
-        game_choice = prompt.select "What would you like to do?" do |menu|
+        game_choice = prompt.select "What would you like to play?" do |menu|
             menu.choice "Blackjack"
             menu.choice "War"
             menu.choice "Strip Poker"
@@ -150,15 +151,9 @@ class Cli
         end
         if game_choice == "Blackjack"
             # Blackjack.new
+            # play_game Blackjack
         elsif game_choice == "War"
-            game = War.new
-            result = game.start
-            if result != "quit"
-                WarGame.create user: @user, result: result
-                play_again? ? warGame.start : game_prompt
-            else
-                game_prompt
-            end
+            play_game War
         elsif game_choice == "Strip Poker"
             puts game_prompt_fail
         else
@@ -174,6 +169,25 @@ class Cli
         sleep 1
         game_prompt
     end
+
+    def play_game game
+        new_game = game.new
+        new_game.start
+        if result != "quit"
+            Game.create user_id: @user.id, game_type: "war", result: new_game.result
+            play_again? game
+        else
+            game_prompt
+        end
+    end
+
+    def play_again? game
+        if prompt.yes? "Would you like to play another game?"
+            play_game game
+        else
+            game_prompt
+        end
+    end 
 
     def exit_casino
         clear_terminal
